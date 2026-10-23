@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA 3D Studios | Logo, Avatar & Animation Agency</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#070707',
+                            darker: '#0d0d0e',
+                            card: '#141416',
+                            border: '#26262a',
+                            red: '#991b1b',
+                            redHover: '#dc2626',
+                            gold: '#d97706',
+                            goldLight: '#f59e0b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #070707;
+            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .glow-red {
+            box-shadow: 0 0 25px -5px rgba(153, 27, 27, 0.4);
+        }
+        .glow-gold {
+            box-shadow: 0 0 20px -5px rgba(217, 119, 6, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0d0d0e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #991b1b;
+            border-radius: 4px;
+        }
+        .gradient-text-red {
+            background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-text-gold {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="custom-scrollbar antialiased selection:bg-red-900 selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 w-full z-40 bg-brand-black/90 backdrop-blur-md border-b border-brand-border/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchPage('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-red to-black border border-brand-red/50 flex items-center justify-center glow-red">
+                    <i class="fas fa-cube text-brand-goldLight text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-wider text-white uppercase">AURA<span class="text-brand-red">3D</span></span>
+                    <span class="block text-[10px] font-semibold text-brand-goldLight tracking-widest uppercase">STUDIOS</span>
+                </div>
+            </div>
+
+            <!-- Desktop Main Navigation Pages -->
+            <nav class="hidden md:flex items-center space-x-1 bg-brand-darker/80 p-1.5 rounded-2xl border border-brand-border">
+                <button onclick="switchPage('home')" id="nav-home" class="nav-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-white bg-brand-red shadow-lg">
+                    <i class="fas fa-home mr-2 text-xs"></i>Home
+                </button>
+                <button onclick="switchPage('portfolio')" id="nav-portfolio" class="nav-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-400 hover:text-white hover:bg-brand-card">
+                    <i class="fas fa-layer-group mr-2 text-xs"></i>Work Showcase
+                </button>
+                <button onclick="switchPage('reviews')" id="nav-reviews" class="nav-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-400 hover:text-white hover:bg-brand-card">
+                    <i class="fas fa-star mr-2 text-xs"></i>Ratings & Reviews
+                </button>
+                <button onclick="switchPage('pricing')" id="nav-pricing" class="nav-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-400 hover:text-white hover:bg-brand-card">
+                    <i class="fas fa-tags mr-2 text-xs"></i>Pricing
+                </button>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center space-x-3">
+                <button onclick="openAdminModal()" class="hidden sm:flex items-center space-x-2 bg-brand-card hover:bg-brand-border border border-brand-gold/40 text-brand-goldLight px-4 py-2 rounded-xl text-xs font-bold transition duration-200">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Add Project</span>
+                </button>
+                <button onclick="openOrderModal()" class="bg-gradient-to-r from-brand-red to-red-800 hover:from-red-700 hover:to-red-900 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition duration-200 shadow-md glow-red flex items-center space-x-2">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Order Now</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white p-2 text-xl focus:outline-none">
+                    <i class="fas fa-bars" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-brand-card border-b border-brand-border px-4 pt-2 pb-6 space-y-2">
+            <button onclick="switchPage('home'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-white bg-brand-red/30">Home</button>
+            <button onclick="switchPage('portfolio'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-gray-300 hover:bg-brand-border">Work Showcase</button>
+            <button onclick="switchPage('reviews'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-gray-300 hover:bg-brand-border">Ratings & Reviews</button>
+            <button onclick="switchPage('pricing'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-gray-300 hover:bg-brand-border">Pricing Packages</button>
+            <button onclick="openAdminModal(); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-brand-goldLight border border-brand-gold/30">
+                <i class="fas fa-plus-circle mr-2"></i> Add New Project (Client/Admin)
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN PAGE CONTAINER -->
+    <main class="pt-24 min-h-screen">
+
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
+        <section id="page-home" class="page-content">
+            <!-- Hero Section -->
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 flex flex-col items-center text-center">
+                <!-- Decorative Glows -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-red/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute top-1/3 left-1/3 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Badge -->
+                <div class="inline-flex items-center space-x-2 bg-brand-card/90 border border-brand-gold/30 px-4 py-2 rounded-full mb-8 glow-gold">
+                    <span class="w-2 h-2 rounded-full bg-brand-goldLight animate-pulse"></span>
+                    <span class="text-xs font-bold text-brand-goldLight tracking-wide uppercase">Next-Gen Visual Agency</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-tight">
+                    High-End <span class="gradient-text-red">3D Logos</span>, Avatars & <span class="gradient-text-gold">Motion Art</span>
+                </h1>
+
+                <p class="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl font-normal leading-relaxed">
+                    We craft hyper-realistic 3D avatars, custom 2D vector identities, dynamic animations, and high-impact social banners for elite brands and creators.
+                </p>
+
+                <!-- CTA Cluster -->
+                <div class="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+                    <button onclick="switchPage('portfolio')" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-red hover:bg-brand-redHover text-white font-bold text-base shadow-xl glow-red transition duration-200 flex items-center justify-center space-x-3">
+                        <span>Explore Studio Portfolio</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button onclick="openOrderModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-card hover:bg-brand-border border border-brand-border text-gray-200 font-bold text-base transition duration-200 flex items-center justify-center space-x-2">
+                        <i class="fab fa-whatsapp text-green-500 text-lg"></i>
+                        <span>Instant Consultation</span>
+                    </button>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl">
+                    <div class="bg-brand-card/60 border border-brand-border/80 p-6 rounded-2xl backdrop-blur-sm">
+                        <p class="text-3xl font-extrabold text-white">650+</p>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">3D Logos Designed</p>
+                    </div>
+                    <div class="bg-brand-card/60 border border-brand-border/80 p-6 rounded-2xl backdrop-blur-sm">
+                        <p class="text-3xl font-extrabold text-brand-goldLight">99.4%</p>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Client Satisfaction</p>
+                    </div>
+                    <div class="bg-brand-card/60 border border-brand-border/80 p-6 rounded-2xl backdrop-blur-sm">
+                        <p class="text-3xl font-extrabold text-white">400+</p>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">3D Avatars Rigged</p>
+                    </div>
+                    <div class="bg-brand-card/60 border border-brand-border/80 p-6 rounded-2xl backdrop-blur-sm">
+                        <p class="text-3xl font-extrabold text-brand-red">24-48h</p>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">Rapid Delivery</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Spotlight -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-brand-border/50">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Our Specialized Disciplines</h2>
+                    <p class="text-gray-400 mt-2 text-sm">Select a category to jump directly to dedicated portfolio showcase</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- 3D Card -->
+                    <div onclick="goToCategory('3d')" class="group cursor-pointer bg-brand-card hover:bg-brand-darker border border-brand-border hover:border-brand-red/60 p-6 rounded-2xl transition duration-300 relative overflow-hidden">
+                        <div class="w-12 h-12 rounded-xl bg-brand-red/20 border border-brand-red/40 flex items-center justify-center text-brand-red mb-4 group-hover:scale-110 transition duration-300">
+                            <i class="fas fa-cube text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">3D Logos & Avatars</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Photorealistic metallic textures, depth lighting, characters, and high-detail 3D models.</p>
+                        <span class="text-xs font-bold text-brand-goldLight group-hover:underline flex items-center space-x-1">
+                            <span>Browse 3D Works</span> <i class="fas fa-chevron-right text-[10px]"></i>
+                        </span>
+                    </div>
+
+                    <!-- 2D Card -->
+                    <div onclick="goToCategory('2d')" class="group cursor-pointer bg-brand-card hover:bg-brand-darker border border-brand-border hover:border-brand-gold/60 p-6 rounded-2xl transition duration-300 relative overflow-hidden">
+                        <div class="w-12 h-12 rounded-xl bg-brand-gold/20 border border-brand-gold/40 flex items-center justify-center text-brand-goldLight mb-4 group-hover:scale-110 transition duration-300">
+                            <i class="fas fa-vector-square text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">2D Logos & Vector</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Clean minimalist logos, mascot art, esports insignias, and scalable vector branding.</p>
+                        <span class="text-xs font-bold text-brand-goldLight group-hover:underline flex items-center space-x-1">
+                            <span>Browse 2D Works</span> <i class="fas fa-chevron-right text-[10px]"></i>
+                        </span>
+                    </div>
+
+                    <!-- Animation Card -->
+                    <div onclick="goToCategory('animation')" class="group cursor-pointer bg-brand-card hover:bg-brand-darker border border-brand-border hover:border-brand-red/60 p-6 rounded-2xl transition duration-300 relative overflow-hidden">
+                        <div class="w-12 h-12 rounded-xl bg-brand-red/20 border border-brand-red/40 flex items-center justify-center text-brand-red mb-4 group-hover:scale-110 transition duration-300">
+                            <i class="fas fa-film text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Animations & Motion</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Twitch stream intros, 3D logo reveals, motion graphics, and video loops.</p>
+                        <span class="text-xs font-bold text-brand-goldLight group-hover:underline flex items-center space-x-1">
+                            <span>Browse Animations</span> <i class="fas fa-chevron-right text-[10px]"></i>
+                        </span>
+                    </div>
+
+                    <!-- Banners Card -->
+                    <div onclick="goToCategory('banners')" class="group cursor-pointer bg-brand-card hover:bg-brand-darker border border-brand-border hover:border-brand-gold/60 p-6 rounded-2xl transition duration-300 relative overflow-hidden">
+                        <div class="w-12 h-12 rounded-xl bg-brand-gold/20 border border-brand-gold/40 flex items-center justify-center text-brand-goldLight mb-4 group-hover:scale-110 transition duration-300">
+                            <i class="fas fa-image text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Banners & Headers</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">YouTube channel art, Twitter/X headers, Twitch overlays, and promotional graphics.</p>
+                        <span class="text-xs font-bold text-brand-goldLight group-hover:underline flex items-center space-x-1">
+                            <span>Browse Banners</span> <i class="fas fa-chevron-right text-[10px]"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 2: PORTFOLIO SHOWCASE PAGE ================= -->
+        <section id="page-portfolio" class="page-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <!-- Page Title -->
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="text-xs font-bold text-brand-goldLight uppercase tracking-widest bg-brand-card px-3 py-1 rounded-full border border-brand-gold/30">Isolated Categories</span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-white mt-3">Studio Work Showcase</h1>
+                    <p class="text-gray-400 mt-2 text-sm">Select a tab below to filter artwork. Only designs belonging to that category will be displayed.</p>
+                </div>
+
+                <!-- CATEGORY NAVIGATION TABS (Strict Isolation) -->
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-10 bg-brand-card p-2 rounded-2xl border border-brand-border max-w-3xl mx-auto">
+                    <button onclick="setCategoryFilter('3d')" id="tab-3d" class="cat-tab px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition duration-200 text-white bg-brand-red flex items-center space-x-2">
+                        <i class="fas fa-cube"></i>
+                        <span>3D Logos & Avatars</span>
+                    </button>
+                    <button onclick="setCategoryFilter('2d')" id="tab-2d" class="cat-tab px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition duration-200 text-gray-400 hover:text-white flex items-center space-x-2">
+                        <i class="fas fa-vector-square"></i>
+                        <span>2D Logos</span>
+                    </button>
+                    <button onclick="setCategoryFilter('animation')" id="tab-animation" class="cat-tab px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition duration-200 text-gray-400 hover:text-white flex items-center space-x-2">
+                        <i class="fas fa-film"></i>
+                        <span>Animations</span>
+                    </button>
+                    <button onclick="setCategoryFilter('banners')" id="tab-banners" class="cat-tab px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition duration-200 text-gray-400 hover:text-white flex items-center space-x-2">
+                        <i class="fas fa-image"></i>
+                        <span>Banners & Headers</span>
+                    </button>
+                </div>
+
+                <!-- Category Header Indicator -->
+                <div class="flex items-center justify-between mb-6 border-b border-brand-border pb-4">
+                    <div class="flex items-center space-x-3">
+                        <h2 id="currentCategoryTitle" class="text-xl font-bold text-white">Showing: 3D Logos & Avatars</h2>
+                        <span id="itemCountBadge" class="bg-brand-red/30 text-brand-goldLight text-xs px-2.5 py-1 rounded-md font-mono border border-brand-red/40">0 items</span>
+                    </div>
+                    <button onclick="openAdminModal()" class="text-xs bg-brand-card hover:bg-brand-border border border-brand-border text-brand-goldLight px-3 py-1.5 rounded-lg flex items-center space-x-1">
+                        <i class="fas fa-plus-circle"></i>
+                        <span class="hidden sm:inline">Add Item Here</span>
+                    </button>
+                </div>
+
+                <!-- PORTFOLIO GRID -->
+                <div id="portfolioGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dynamic Items Injected via JavaScript -->
+                </div>
+
+                <!-- Empty State Message -->
+                <div id="emptyState" class="hidden text-center py-20 bg-brand-card/40 rounded-3xl border border-dashed border-brand-border">
+                    <i class="fas fa-folder-open text-4xl text-gray-600 mb-3"></i>
+                    <p class="text-gray-400 text-base font-semibold">No artwork added in this category yet.</p>
+                    <button onclick="openAdminModal()" class="mt-4 px-4 py-2 bg-brand-red text-white text-xs font-bold rounded-xl">Add First Item</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 3: CLIENT RATINGS & REVIEWS PAGE ================= -->
+        <section id="page-reviews" class="page-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-xs font-bold text-brand-goldLight uppercase tracking-widest bg-brand-card px-3 py-1 rounded-full border border-brand-gold/30">Client Feedback</span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-white mt-3">Ratings & Testimonials</h1>
+                    <p class="text-gray-400 mt-2 text-sm">Real reviews from content creators, gaming clans, and corporate clients worldwide.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Rating Form Column -->
+                    <div class="lg:col-span-1 bg-brand-card p-6 rounded-2xl border border-brand-border h-fit sticky top-28">
+                        <h2 class="text-xl font-bold text-white mb-1">Leave a Review</h2>
+                        <p class="text-xs text-gray-400 mb-6">Worked with AURA 3D? Share your feedback with future clients.</p>
+
+                        <form id="reviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Your Name / Gaming Alias</label>
+                                <input type="text" id="revName" required placeholder="e.g. Alex 'Viper' Vance" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Project Category</label>
+                                <select id="revCategory" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red">
+                                    <option value="3D Logo & Avatar">3D Logo & Avatar</option>
+                                    <option value="2D Mascot / Vector">2D Mascot / Vector</option>
+                                    <option value="Stream Animation">Stream Animation</option>
+                                    <option value="YouTube / X Banner">YouTube / X Banner</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Star Rating</label>
+                                <div class="flex items-center space-x-2 bg-brand-darker p-3 rounded-xl border border-brand-border">
+                                    <div class="flex text-brand-goldLight text-lg space-x-1" id="starPicker">
+                                        <i class="fas fa-star cursor-pointer" onclick="setRating(1)"></i>
+                                        <i class="fas fa-star cursor-pointer" onclick="setRating(2)"></i>
+                                        <i class="fas fa-star cursor-pointer" onclick="setRating(3)"></i>
+                                        <i class="fas fa-star cursor-pointer" onclick="setRating(4)"></i>
+                                        <i class="fas fa-star cursor-pointer" onclick="setRating(5)"></i>
+                                    </div>
+                                    <span id="ratingScoreText" class="text-xs font-bold text-gray-400 ml-auto">5.0 / 5</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Detailed Feedback</label>
+                                <textarea id="revComment" required rows="4" placeholder="Describe the quality, communication, and speed..." class="w-full bg-brand-darker border border-brand-border rounded-xl p-4 text-sm text-white focus:outline-none focus:border-brand-red"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-brand-red to-red-800 hover:from-red-700 hover:to-red-900 text-white font-bold py-3 rounded-xl text-sm transition glow-red">
+                                Submit Review
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Reviews List Column -->
+                    <div class="lg:col-span-2 space-y-4">
+                        <!-- Score summary -->
+                        <div class="bg-brand-card p-6 rounded-2xl border border-brand-border flex items-center justify-between flex-wrap gap-4">
+                            <div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-4xl font-extrabold text-white">4.9</span>
+                                    <div>
+                                        <div class="flex text-brand-goldLight text-sm">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="text-xs text-gray-400">Based on client ratings</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-400 bg-brand-darker px-4 py-2 rounded-xl border border-brand-border">
+                                <i class="fas fa-shield-alt text-green-500 mr-1"></i> Verified Client Submissions
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Reviews Feed -->
+                        <div id="reviewsList" class="space-y-4">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 4: PRICING PACKAGES PAGE ================= -->
+        <section id="page-pricing" class="page-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-xs font-bold text-brand-goldLight uppercase tracking-widest bg-brand-card px-3 py-1 rounded-full border border-brand-gold/30">Clear Investment</span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-white mt-3">Studio Pricing Packages</h1>
+                    <p class="text-gray-400 mt-2 text-sm">Transparent pricing with no hidden charges. Pick a plan or contact us for custom work.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Starter Plan -->
+                    <div class="bg-brand-card rounded-2xl border border-brand-border p-8 flex flex-col justify-between hover:border-gray-500 transition duration-200">
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Starter Tier</span>
+                            <h3 class="text-2xl font-bold text-white mt-2">2D Vector & Banners</h3>
+                            <div class="mt-4 mb-6">
+                                <span class="text-4xl font-extrabold text-white">$49</span>
+                                <span class="text-gray-400 text-xs">/ per design</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>High-Res 2D Vector Logo</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>Social Banner (YT / X / Twitch)</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>PNG, JPG & Vector Source Files</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>2 Revision Rounds</span></li>
+                                <li class="flex items-center space-x-2 text-gray-500"><i class="fas fa-times text-xs"></i><span>3D Modeling & Rigging</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="openOrderModal('Starter Tier - $49')" class="w-full bg-brand-darker hover:bg-brand-border text-white font-bold py-3 rounded-xl border border-brand-border text-sm transition">Select Starter</button>
+                    </div>
+
+                    <!-- PRO 3D Plan (Featured) -->
+                    <div class="bg-brand-card rounded-2xl border-2 border-brand-red p-8 flex flex-col justify-between relative glow-red transform lg:-translate-y-2">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-red text-white px-4 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider shadow-md">
+                            Most Popular
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-brand-goldLight uppercase tracking-widest">Pro Agency Tier</span>
+                            <h3 class="text-2xl font-bold text-white mt-2">3D Logo & Avatar</h3>
+                            <div class="mt-4 mb-6">
+                                <span class="text-4xl font-extrabold text-white">$129</span>
+                                <span class="text-gray-400 text-xs">/ complete pack</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>Full 3D Metallic / Glass Logo</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>Custom 3D Avatar Character</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>4K Ultra-HD Render Passes</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>Matching Banner & Social Kit</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>Unlimited Revisions</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="openOrderModal('Pro 3D Tier - $129')" class="w-full bg-brand-red hover:bg-brand-redHover text-white font-bold py-3 rounded-xl text-sm shadow-lg transition">Select Pro 3D</button>
+                    </div>
+
+                    <!-- Ultimate Motion Plan -->
+                    <div class="bg-brand-card rounded-2xl border border-brand-border p-8 flex flex-col justify-between hover:border-brand-gold/50 transition duration-200">
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Elite Tier</span>
+                            <h3 class="text-2xl font-bold text-white mt-2">3D Animation & Motion</h3>
+                            <div class="mt-4 mb-6">
+                                <span class="text-4xl font-extrabold text-white">$249</span>
+                                <span class="text-gray-400 text-xs">/ animated suite</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>3D Animated Logo Intro (4K 60fps)</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>Stream Overlay Motion Package</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>Custom Sound Design & FX</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>Transparent Alpha Video Files</span></li>
+                                <li class="flex items-center space-x-2"><i class="fas fa-check text-brand-goldLight text-xs"></i><span>VIP Priority Support</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="openOrderModal('Elite Motion Tier - $249')" class="w-full bg-brand-darker hover:bg-brand-border text-white font-bold py-3 rounded-xl border border-brand-border text-sm transition">Select Elite Motion</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-black border-t border-brand-border mt-20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-red flex items-center justify-center">
+                    <i class="fas fa-cube text-white text-sm"></i>
+                </div>
+                <span class="text-sm font-bold text-white tracking-wider">AURA 3D STUDIOS</span>
+            </div>
+
+            <p class="text-xs text-gray-500 text-center">
+                © 2026 AURA 3D Studio. All Rights Reserved. Designed for Professional Client Delivery.
+            </p>
+
+            <div class="flex space-x-4 text-gray-400 text-base">
+                <a href="#" class="hover:text-brand-red"><i class="fab fa-discord"></i></a>
+                <a href="#" class="hover:text-brand-goldLight"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-brand-red"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-green-500"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ================= MODAL 1: IN-APP CONTENT MANAGEMENT (ADD WORK) ================= -->
+    <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-brand-card border border-brand-border w-full max-w-lg rounded-2xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-brand-gold/20 border border-brand-gold/40 flex items-center justify-center text-brand-goldLight">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Add New Project to Website</h3>
+                    <p class="text-xs text-gray-400">Saves directly to LocalStorage without modifying code.</p>
+                </div>
+            </div>
+
+            <form onsubmit="handleAddItem(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Select Target Category</label>
+                    <select id="itemCat" required class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red">
+                        <option value="3d">3D Logo & Avatar</option>
+                        <option value="2d">2D Logo & Vector</option>
+                        <option value="animation">Animation & Motion Graphic</option>
+                        <option value="banners">Banner & Social Graphic</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Project Title</label>
+                    <input type="text" id="itemTitle" required placeholder="e.g. Cyberpunk Gaming Emblem" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Image / Video Thumbnail URL</label>
+                    <input type="url" id="itemUrl" required placeholder="https://images.unsplash.com/photo-..." class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red">
+                    <span class="text-[10px] text-gray-500 mt-1 block">Paste any valid image URL or Unsplash link.</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Client / Brand Name</label>
+                    <input type="text" id="itemClient" required placeholder="e.g. Esports Team Apex" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Short Description</label>
+                    <textarea id="itemDesc" rows="3" required placeholder="Details about lighting, software used, rigging..." class="w-full bg-brand-darker border border-brand-border rounded-xl p-4 text-sm text-white focus:outline-none focus:border-brand-red"></textarea>
+                </div>
+
+                <div class="pt-2 flex justify-end space-x-3">
+                    <button type="button" onclick="closeAdminModal()" class="px-5 py-2.5 rounded-xl text-xs font-bold text-gray-400 hover:bg-brand-border">Cancel</button>
+                    <button type="submit" class="px-6 py-2.5 bg-brand-red hover:bg-brand-redHover text-white font-bold text-xs rounded-xl glow-red">Publish Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ================= MODAL 2: LIGHTBOX PREVIEW ================= -->
+    <div id="lightboxModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center hidden p-4" onclick="closeLightbox()">
+        <div class="max-w-4xl w-full bg-brand-card border border-brand-border rounded-2xl overflow-hidden relative" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 bg-black/60 text-white w-9 h-9 rounded-full flex items-center justify-center hover:bg-brand-red z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="bg-black flex items-center justify-center max-h-[70vh] overflow-hidden">
+                <img id="lightboxImg" src="" alt="Full artwork" class="max-h-[70vh] w-auto object-contain">
+            </div>
+            <div class="p-6">
+                <span id="lightboxCat" class="text-xs font-bold text-brand-goldLight uppercase tracking-widest bg-brand-darker px-3 py-1 rounded-full border border-brand-border">3D Logo</span>
+                <h3 id="lightboxTitle" class="text-2xl font-bold text-white mt-2">Artwork Title</h3>
+                <p id="lightboxClient" class="text-xs font-semibold text-gray-400 mt-1">Client: Apex Gaming</p>
+                <p id="lightboxDesc" class="text-sm text-gray-300 mt-3 leading-relaxed">Description goes here...</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= MODAL 3: ORDER NOW / CONTACT ================= -->
+    <div id="orderModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-brand-card border border-brand-border w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+            <button onclick="closeOrderModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-brand-red/20 border border-brand-red/40 flex items-center justify-center text-brand-red mx-auto mb-3">
+                    <i class="fas fa-paper-plane text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">Start Your Order</h3>
+                <p class="text-xs text-gray-400 mt-1">Direct connect with our lead 3D & Motion designer</p>
+            </div>
+
+            <div id="selectedPlanBadge" class="hidden mb-4 p-3 bg-brand-darker border border-brand-gold/30 rounded-xl text-center">
+                <span class="text-xs text-brand-goldLight font-bold">Selected Package: <span id="planName"></span></span>
+            </div>
+
+            <div class="space-y-3">
+                <a id="whatsappBtn" href="https://wa.me/923222264829?text=Hello%20AURA%203D%20Studio,%20I%20want%20to%20order%20a%20design." target="_blank" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold p-3.5 rounded-xl text-sm flex items-center justify-center space-x-3 transition">
+                    <i class="fab fa-whatsapp text-lg"></i>
+                    <span>Order via WhatsApp Direct</span>
+                </a>
+
+                <a href="mailto:alisecurity8080@gmail.com?subject=Studio%20Design%20Order" class="w-full bg-brand-darker hover:bg-brand-border border border-brand-border text-white font-bold p-3.5 rounded-xl text-sm flex items-center justify-center space-x-3 transition">
+                    <i class="fas fa-envelope text-brand-goldLight text-lg"></i>
+                    <span>Order via Email Enquiry</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // Default initial portfolio data
+        const initialPortfolio = [
+            // 3D Category
+            { id: 1, category: '3d', title: 'Cybernetic Skull Emblem', client: 'Vortex Esports', url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80', desc: 'Custom 3D metallic avatar with glowing red energy shaders and volumetric studio lighting.' },
+            { id: 2, category: '3d', title: 'Chrome Gold Monogram', client: 'Aura Luxury Clan', url: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=800&q=80', desc: 'Heavy gold reflective material 3D logo render with Ray-Tracing reflections.' },
+
+            // 2D Category
+            { id: 3, category: '2d', title: 'Phoenix Esports Mascot', client: 'Ignite Gaming', url: 'https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=800&q=80', desc: 'Sharp vector mascot logo crafted for Twitch overlay integration and apparel.' },
+            { id: 4, category: '2d', title: 'Minimal Cyber Shield', client: 'ZeroByte Security', url: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=800&q=80', desc: 'Flat 2D vector badge design focused on sleek corporate dark tech branding.' },
+
+            // Animations Category
+            { id: 5, category: 'animation', title: 'Neonic 3D Logo Reveal', client: 'Streamer Protocol', url: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80', desc: '4K 60fps motion graphics intro with particle explosive reveal and audio synchronization.' },
+
+            // Banners Category
+            { id: 6, category: 'banners', title: 'Twitch Header & Overlay Kit', client: 'ShadowFX Stream', url: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80', desc: 'High resolution banner suite with custom offline screens and social schedule panels.' }
+        ];
+
+        // Default initial reviews data
+        const initialReviews = [
+            { name: "Marcus 'Viper' Reid", category: "3D Logo & Avatar", rating: 5, comment: "The 3D metallic avatar was mind-blowing! Delivered in less than 24 hours. AURA Studios is unmatched.", date: "2 days ago" },
+            { name: "Siren Clan Lead", category: "Stream Animation", rating: 5, comment: "The motion logo reveal brought our stream overlays to life. Worth every penny!", date: "1 week ago" }
+        ];
+
+        // Application State
+        let portfolioItems = JSON.parse(localStorage.getItem('aura_portfolio')) || initialPortfolio;
+        let clientReviews = JSON.parse(localStorage.getItem('aura_reviews')) || initialReviews;
+        let currentCategory = '3d';
+        let currentRatingScore = 5;
+
+        // Save data to LocalStorage
+        function saveData() {
+            localStorage.setItem('aura_portfolio', JSON.stringify(portfolioItems));
+            localStorage.setItem('aura_reviews', JSON.stringify(clientReviews));
+        }
+
+        // Page Navigation
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-red', 'text-white', 'shadow-lg');
+                btn.classList.add('text-gray-400');
+            });
+
+            const activeNav = document.getElementById(`nav-${pageId}`);
+            if (activeNav) {
+                activeNav.classList.add('bg-brand-red', 'text-white', 'shadow-lg');
+                activeNav.classList.remove('text-gray-400');
+            }
+
+            if (pageId === 'portfolio') {
+                renderPortfolio();
+            } else if (pageId === 'reviews') {
+                renderReviews();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Jump directly to specific category tab in portfolio
+        function goToCategory(cat) {
+            currentCategory = cat;
+            switchPage('portfolio');
+            setCategoryFilter(cat);
+        }
+
+        // Set Filter Tab
+        function setCategoryFilter(cat) {
+            currentCategory = cat;
+
+            document.querySelectorAll('.cat-tab').forEach(btn => {
+                btn.classList.remove('bg-brand-red', 'text-white');
+                btn.classList.add('text-gray-400');
+            });
+
+            const activeTab = document.getElementById(`tab-${cat}`);
+            if (activeTab) {
+                activeTab.classList.add('bg-brand-red', 'text-white');
+                activeTab.classList.remove('text-gray-400');
+            }
+
+            // Update title
+            const titles = {
+                '3d': 'Showing: 3D Logos & Avatars',
+                '2d': 'Showing: 2D Logos & Vector Art',
+                'animation': 'Showing: Animations & Motion Graphics',
+                'banners': 'Showing: Banners, Headers & Social Graphics'
+            };
+            document.getElementById('currentCategoryTitle').innerText = titles[cat];
+
+            renderPortfolio();
+        }
+
+        // Render Portfolio Grid (STRICT ISOLATION)
+        function renderPortfolio() {
+            const grid = document.getElementById('portfolioGrid');
+            const emptyState = document.getElementById('emptyState');
+            grid.innerHTML = '';
+
+            // Filter ONLY matching items
+            const filtered = portfolioItems.filter(item => item.category === currentCategory);
+
+            document.getElementById('itemCountBadge').innerText = `${filtered.length} Items`;
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-brand-card border border-brand-border rounded-2xl overflow-hidden hover:border-brand-red/60 transition duration-300 group flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="relative overflow-hidden aspect-video bg-black cursor-pointer" onclick="openLightbox(${item.id})">
+                            <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100" onerror="this.src='https://placehold.co/800x450/141416/ffffff?text=Studio+Design+Preview'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent opacity-60"></div>
+                            <span class="absolute top-3 right-3 bg-black/70 text-brand-goldLight text-[10px] font-bold px-2.5 py-1 rounded-full border border-brand-gold/30 uppercase">
+                                ${item.category}
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold text-white group-hover:text-brand-goldLight transition">${item.title}</h3>
+                            <p class="text-xs font-semibold text-gray-500 mt-1">Client: ${item.client}</p>
+                            <p class="text-xs text-gray-400 mt-3 line-clamp-2 leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-2 flex items-center justify-between border-t border-brand-border/40">
+                        <button onclick="openLightbox(${item.id})" class="text-xs font-bold text-brand-goldLight hover:underline flex items-center space-x-1">
+                            <span>View Full Spec</span>
+                            <i class="fas fa-expand text-[10px]"></i>
+                        </button>
+                        <button onclick="deleteItem(${item.id})" class="text-xs text-gray-600 hover:text-brand-red transition p-1" title="Delete (Admin)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Render Reviews
+        function renderReviews() {
+            const list = document.getElementById('reviewsList');
+            list.innerHTML = '';
+
+            clientReviews.forEach(rev => {
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    starsHtml += `<i class="fas fa-star ${i <= rev.rating ? 'text-brand-goldLight' : 'text-gray-700'}"></i>`;
+                }
+
+                const card = document.createElement('div');
+                card.className = "bg-brand-card border border-brand-border p-6 rounded-2xl";
+                card.innerHTML = `
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h4 class="font-bold text-white text-base">${rev.name}</h4>
+                            <span class="text-xs text-brand-goldLight font-medium">${rev.category}</span>
+                        </div>
+                        <div class="flex text-xs space-x-1">
+                            ${starsHtml}
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-300 mt-3 leading-relaxed">"${rev.comment}"</p>
+                    <span class="text-[10px] text-gray-500 mt-3 block">${rev.date || 'Recent Client'}</span>
+                `;
+                list.prepend(card);
+            });
+        }
+
+        // Handle Add New Project Form (In-App Content Admin)
+        function handleAddItem(e) {
+            e.preventDefault();
+            const newItem = {
+                id: Date.now(),
+                category: document.getElementById('itemCat').value,
+                title: document.getElementById('itemTitle').value,
+                url: document.getElementById('itemUrl').value,
+                client: document.getElementById('itemClient').value,
+                desc: document.getElementById('itemDesc').value
+            };
+
+            portfolioItems.push(newItem);
+            saveData();
+            closeAdminModal();
+
+            // Jump to the added item's category tab
+            goToCategory(newItem.category);
+        }
+
+        // Delete Portfolio Item
+        function deleteItem(id) {
+            if (confirm("Are you sure you want to remove this project from website portfolio?")) {
+                portfolioItems = portfolioItems.filter(item => item.id !== id);
+                saveData();
+                renderPortfolio();
+            }
+        }
+
+        // Star Rating Selector Logic
+        function setRating(score) {
+            currentRatingScore = score;
+            document.getElementById('ratingScoreText').innerText = `${score}.0 / 5`;
+            const stars = document.getElementById('starPicker').children;
+            for (let i = 0; i < 5; i++) {
+                if (i < score) {
+                    stars[i].className = "fas fa-star text-brand-goldLight cursor-pointer";
+                } else {
+                    stars[i].className = "fas fa-star text-gray-700 cursor-pointer";
+                }
+            }
+        }
+
+        // Handle Review Submission
+        function handleReviewSubmit(e) {
+            e.preventDefault();
+            const newRev = {
+                name: document.getElementById('revName').value,
+                category: document.getElementById('revCategory').value,
+                rating: currentRatingScore,
+                comment: document.getElementById('revComment').value,
+                date: "Just now"
+            };
+
+            clientReviews.push(newRev);
+            saveData();
+            renderReviews();
+
+            document.getElementById('reviewForm').reset();
+            setRating(5);
+            alert("Thank you! Your rating and review have been published to the agency site.");
+        }
+
+        // Modal Toggles & Lightbox
+        function openAdminModal() {
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        function openOrderModal(planName = '') {
+            const modal = document.getElementById('orderModal');
+            const planBadge = document.getElementById('selectedPlanBadge');
+            const planText = document.getElementById('planName');
+
+            if (planName) {
+                planText.innerText = planName;
+                planBadge.classList.remove('hidden');
+            } else {
+                planBadge.classList.add('hidden');
+            }
+
+            modal.classList.remove('hidden');
+        }
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.add('hidden');
+        }
+
+        function openLightbox(id) {
+            const item = portfolioItems.find(i => i.id === id);
+            if (!item) return;
+
+            document.getElementById('lightboxImg').src = item.url;
+            document.getElementById('lightboxTitle').innerText = item.title;
+            document.getElementById('lightboxClient').innerText = `Client: ${item.client}`;
+            document.getElementById('lightboxDesc').innerText = item.desc;
+            document.getElementById('lightboxCat').innerText = `${item.category} artwork`;
+
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Initializer
+        window.onload = function() {
+            renderPortfolio();
+        };
+    </script>
+</body>
+</html>
